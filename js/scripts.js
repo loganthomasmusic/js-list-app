@@ -1,4 +1,21 @@
 let pokemonList = [
+    {
+        name: 'Bulbasour',
+        height: 7,
+        type: 'grass'
+    },
+    { 
+        name: 'Charmander',
+        height: 6,
+        type: 'fire'
+    },
+    {
+        name: 'Squirtle',
+        height: 5,
+        type: 'water'
+    }
+];
+//creates database of pokemon for use in the following code
 
 for (let i = 0; i < pokemonList.length; i++) {
     document.write(pokemonList[i].name + ' (height: ' + pokemonList[i].height + ') ');
