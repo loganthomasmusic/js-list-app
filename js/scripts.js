@@ -29,7 +29,7 @@ pokemonList.forEach(function(pokemon) {
     
 })
 
-/*creates a function that does the following:
+/*implements a looped function that does the following:
         lists the pokemon by name and height on the DOM
         specifies pokemon with height of over 6 as "big"
         adds a line break between each object
