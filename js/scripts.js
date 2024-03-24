@@ -17,14 +17,20 @@ let pokemonList = [
 ];
 //creates database of pokemon for use in the following code
 
-for (let i = 0; i < pokemonList.length; i++) {
-    document.write(pokemonList[i].name + ' (height: ' + pokemonList[i].height + ') ');
+pokemonList.forEach(function(pokemon) {
 
-    if (pokemonList[i].height > 6) {
-        document.write("Wow, that's big!")
-    };
+    document.write(pokemon.name + ' (height: ' + pokemon.height + ') ');
+
+    if (pokemon.height > 6) {
+            document.write("Wow, that's big!")
+        };
 
     document.write('<br>')
+    
+})
 
-}
-//lists the pokemon by name and height on the DOM, specifying pokemon with over height of 6 as "big" and adding a line break between each object
+/*creates a function that does the following:
+        lists the pokemon by name and height on the DOM
+        specifies pokemon with height of over 6 as "big"
+        adds a line break between each object
+*/
