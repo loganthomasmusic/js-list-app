@@ -1,25 +1,8 @@
 let pokemonRepository = (function (){
     
-    let repository = [ //create repository of pokemon to be called upon using the following functions
+    let repository = []; //create repository of pokemon to be called upon using the following functions
 
-        {
-            name: 'Bulbasour',
-            height: 7,
-            type: 'grass'
-        },
-
-        { 
-            name: 'Charmander',
-            height: 6,
-            type: 'fire'
-        },
-
-        {
-            name: 'Squirtle',
-            height: 5,
-            type: 'water'
-        }
-    ];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; //references the pokemon database api
 
     function getAll(){ //allow code to call upon the repository
         return repository;
@@ -43,17 +26,53 @@ let pokemonRepository = (function (){
     }
 
     function showDetails(pokemon) { 
-        console.log(pokemon) //log pokemon to console when function is called upon
+        loadDetails(pokemon).then (function () {
+            console.log(pokemon);
+        });
+    } //log pokemon to console when function is called upon
+
+    function loadList() {
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            json.results.forEach(function (item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        })
+    }
+
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (details) {
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types;
+        }).catch(function (e) {
+            console.error(e);
+        });
     }
 
     return { //return data from IIFE functions
         add: add,
         getAll: getAll,
-        addListItem: addListItem
+        addListItem: addListItem,
+        loadList: loadList,
+        loadDetails: loadDetails,
+        showDetails: showDetails
       };
 
 })();
 
-pokemonRepository.getAll().forEach(function (pokemon) {
-    pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function() {
+    pokemonRepository.getAll().forEach(function(pokemon) {
+        pokemonRepository.addListItem(pokemon);
+    });
 });
