@@ -68,19 +68,18 @@ let pokemonRepository = (function (){
     } //log pokemon to console when function is called upon
 
     function showModal(pokemon) {
-        var modalTitle = document.querySelector('.modal-title');
-        var modalImage = document.querySelector('.modal-image');
-        var modalName = document.querySelector('.modal-name');
-        var modalHeight = document.querySelector('.modal-height');
-        var modalAbilities = document.querySelector('.modal-abilities');
+        console.log('Showing modal for', pokemon.name);
+        let modalTitle = document.querySelector('.modal-title');
+        let modalImage = document.querySelector('.modal-image');
+        let modalName = document.querySelector('.modal-name');
+        let modalHeight = document.querySelector('.modal-height');
+        let modalAbilities = document.querySelector('.modal-abilities');
     
         modalTitle.innerText = pokemon.name;
         modalImage.setAttribute('src', pokemon.imageUrl);
-        modalName.innerText = 'Name: ' + pokemon.name;
         modalHeight.innerText = 'Height: ' + pokemon.height + 'm';
-        modalAbilities.innerText = 'Abilities: ' + pokemon.abilities.join(', ');
-    
-        $('#pokemonModal').modal('show');
+
+        $("#pokemonModal").modal()
       }
 
     return { //return data from IIFE functions
